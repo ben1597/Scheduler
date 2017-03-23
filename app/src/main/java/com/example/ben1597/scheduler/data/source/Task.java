@@ -42,10 +42,10 @@ public final class Task {
     private final String mDescription;
 
     @Nullable
-    private final int mStartTimes;
+    private final String mStartTimes;
 
     @Nullable
-    private final int mDuration;
+    private final String mDuration;
 
     @Nullable
     private final int mCompleteTimes;
@@ -61,13 +61,13 @@ public final class Task {
      */
 
     public Task(@Nullable String title, @Nullable Integer type, @Nullable String description,
-                @Nullable int startTimes, @Nullable int duration) {
+                @Nullable String startTimes, @Nullable String duration) {
         this(title, type, description, UUID.randomUUID().toString(), startTimes, duration, 0);
     }
 
 
     public Task(@Nullable String title, @Nullable Integer type, @Nullable String description,
-                @NonNull String id, @Nullable int startTimes, @Nullable int duration, @Nullable int completeTimes) {
+                @NonNull String id, @Nullable String startTimes, @Nullable String duration, @Nullable int completeTimes) {
         mId = id;
         mTitle = title;
         mType = type;
@@ -93,12 +93,12 @@ public final class Task {
     }
 
     @Nullable
-    public Integer getStartTimes() {
+    public String getStartTimes() {
         return mStartTimes;
     }
 
     @Nullable
-    public Integer getDuration() {
+    public String getDuration() {
         return mDuration;
     }
 
@@ -135,6 +135,12 @@ public final class Task {
                 Objects.equal(mTitle, task.mTitle) &&
                 Objects.equal(mDescription, task.mDescription);
     }
+
+
+//    public static Integer compare(Task task1, Task task2) {
+//        return task1.getStartTimes().compareTo(task2.getStartTimes());
+//    }
+
 
     @Override
     public int hashCode() {

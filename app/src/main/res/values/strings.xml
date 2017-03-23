@@ -24,6 +24,13 @@
         <item>樂器</item>
     </string-array>
 
+    <string-array name="schedule_types_value">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
     <string-array name="schedule_duration">
         <item>1hr</item>
         <item>2hr</item>
@@ -35,4 +42,17 @@
         <item>8hr</item>
         <item>整天都做這個就飽了？</item>
     </string-array>
+
+    <string-array name="schedule_duration_value">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>0</item>
+    </string-array>
+
 </resources>

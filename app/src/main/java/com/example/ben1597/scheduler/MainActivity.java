@@ -1,5 +1,7 @@
 package com.example.ben1597.scheduler;
 
+import android.support.annotation.VisibleForTesting;
+import android.support.test.espresso.IdlingResource;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -9,6 +11,7 @@ import android.os.Bundle;
 
 import com.example.ben1597.scheduler.showSchedule.ShowScheduleFragment;
 import com.example.ben1597.scheduler.showSchedule.ShowSchedulePresenter;
+import com.example.ben1597.scheduler.util.EspressoIdlingResource;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.contentFrame, fragment);
         transaction.commit();
+    }
+
+    @VisibleForTesting
+    public IdlingResource getCountingIdlingResource() {
+        return EspressoIdlingResource.getIdlingResource();
     }
 }
 

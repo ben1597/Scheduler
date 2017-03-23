@@ -67,10 +67,10 @@ public class TasksLocalDataSource implements TasksDataSource {
                 Integer type = c.getInt(c.getColumnIndexOrThrow(ScheduleEntry.COLUMN_NAME_TYPE));
                 String description =
                         c.getString(c.getColumnIndexOrThrow(ScheduleEntry.COLUMN_NAME_DESCRIPTION));
-                Integer startTimes =
-                        c.getInt(c.getColumnIndexOrThrow(ScheduleEntry.COLUMN_NAME_START_TIME));
-                Integer duration =
-                        c.getInt(c.getColumnIndexOrThrow(ScheduleEntry.COLUMN_NAME_DURATION));
+                String startTimes =
+                        c.getString(c.getColumnIndexOrThrow(ScheduleEntry.COLUMN_NAME_START_TIME));
+                String duration =
+                        c.getString(c.getColumnIndexOrThrow(ScheduleEntry.COLUMN_NAME_DURATION));
                 Integer completeTimes =
                         c.getInt(c.getColumnIndexOrThrow(ScheduleEntry.COLUMN_NAME_COMPLETE_TIMES));
 //                boolean completed =
@@ -99,12 +99,14 @@ public class TasksLocalDataSource implements TasksDataSource {
                 ScheduleEntry.COLUMN_NAME_ENTRY_ID,
                 ScheduleEntry.COLUMN_NAME_TITLE,
                 ScheduleEntry.COLUMN_NAME_TYPE,
+                ScheduleEntry.COLUMN_NAME_START_TIME,
+                ScheduleEntry.COLUMN_NAME_DURATION,
                 ScheduleEntry.COLUMN_NAME_DESCRIPTION,
                 ScheduleEntry.COLUMN_NAME_COMPLETE_TIMES
         };
         String sql = String.format("SELECT %s FROM %s", TextUtils.join(",", projection), ScheduleEntry.TABLE_NAME);
         return mDatabaseHelper.createQuery(ScheduleEntry.TABLE_NAME, sql)
-                .mapToList(mTaskMapperFunction);
+                .mapToList(mTaskMapperFunction).first();
     }
 
     @Override

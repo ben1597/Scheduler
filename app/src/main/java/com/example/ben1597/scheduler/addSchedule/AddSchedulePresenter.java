@@ -5,8 +5,6 @@ import android.support.annotation.NonNull;
 import com.example.ben1597.scheduler.data.source.Task;
 import com.example.ben1597.scheduler.data.source.TasksLocalDataSource;
 
-import java.util.Date;
-
 /**
  * Created by ben1597 on 2017/3/8.
  */
@@ -27,7 +25,7 @@ public class AddSchedulePresenter implements AddScheduleContract.Presenter {
     }
 
     @Override
-    public void SaveSchedule(String title, String description, Integer type, int startTime, int duration) {
+    public void SaveSchedule(String title, String description, int type, String startTime, String duration) {
         Task task = new Task(title, type, description, startTime, duration);
         if (task.isEmpty()) {
             mShowScheduleView.showEmptyScheduleError();

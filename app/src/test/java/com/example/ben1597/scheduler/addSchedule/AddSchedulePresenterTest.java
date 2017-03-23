@@ -37,7 +37,7 @@ public class AddSchedulePresenterTest {
 
     @Test
     public void saveScheduleToRepository_showsSuccessMessageUi(){
-        mAddSchedulePresenter.SaveSchedule("Sport", "good", 0, 0, 3);
+        mAddSchedulePresenter.SaveSchedule("Sport", "good", 0, "0", "3");
         verify(mtasksDataSource).saveTask(any(Task.class)); // saved to the model
         verify(mAddScheduleView).showScheduleList();
     }
@@ -45,7 +45,7 @@ public class AddSchedulePresenterTest {
     @Test
     public void saveNote_emptyNoteShowsErrorUi() {
         // When the presenter is asked to save an empty note
-        mAddSchedulePresenter.SaveSchedule("", "", 0 , 0, 0);
+        mAddSchedulePresenter.SaveSchedule("", "", 0 , "", "" );
 
         // Then an empty not error is shown in the UI
         verify(mAddScheduleView).showEmptyScheduleError();

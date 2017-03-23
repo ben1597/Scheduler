@@ -20,8 +20,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+
 public class TasksDbHelper extends SQLiteOpenHelper {
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 3;
 
     public static final String DATABASE_NAME = "Schedules.db";
 
@@ -35,11 +36,12 @@ public class TasksDbHelper extends SQLiteOpenHelper {
 
     private static final String SQL_CREATE_SCHEDULE =
             "CREATE TABLE " + TasksPersistenceContract.ScheduleEntry.TABLE_NAME + " (" +
-                    TasksPersistenceContract.ScheduleEntry.COLUMN_NAME_TITLE + TEXT_TYPE + " PRIMARY KEY," +
+                    TasksPersistenceContract.ScheduleEntry.COLUMN_NAME_ENTRY_ID + TEXT_TYPE + " PRIMARY KEY," +
+                    TasksPersistenceContract.ScheduleEntry.COLUMN_NAME_TITLE + TEXT_TYPE  + COMMA_SEP +
                     TasksPersistenceContract.ScheduleEntry.COLUMN_NAME_TYPE + BOOLEAN_TYPE + COMMA_SEP +
                     TasksPersistenceContract.ScheduleEntry.COLUMN_NAME_DESCRIPTION + TEXT_TYPE + COMMA_SEP +
-                    TasksPersistenceContract.ScheduleEntry.COLUMN_NAME_START_TIME + INTEGER_TYPE + COMMA_SEP +
-                    TasksPersistenceContract.ScheduleEntry.COLUMN_NAME_DURATION + INTEGER_TYPE + COMMA_SEP +
+                    TasksPersistenceContract.ScheduleEntry.COLUMN_NAME_START_TIME + TEXT_TYPE + COMMA_SEP +
+                    TasksPersistenceContract.ScheduleEntry.COLUMN_NAME_DURATION + TEXT_TYPE + COMMA_SEP +
                     TasksPersistenceContract.ScheduleEntry.COLUMN_NAME_COMPLETE_TIMES + INTEGER_TYPE +
             " )";
 
@@ -48,7 +50,7 @@ public class TasksDbHelper extends SQLiteOpenHelper {
                     TasksPersistenceContract.DayEntry.COLUMN_NAME_ENTRY_ID + TEXT_TYPE + " PRIMARY KEY," +
                     TasksPersistenceContract.DayEntry.COLUMN_NAME_DATE + TEXT_TYPE + COMMA_SEP +
                     TasksPersistenceContract.DayEntry.COLUMN_NAME_SCHEDULE_ID + TEXT_TYPE + COMMA_SEP +
-                    TasksPersistenceContract.DayEntry.COLUMN_NAME_DONE + BOOLEAN_TYPE + COMMA_SEP +
+                    TasksPersistenceContract.DayEntry.COLUMN_NAME_DONE + BOOLEAN_TYPE  +
                     " )";
 
 
@@ -56,15 +58,20 @@ public class TasksDbHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_SCHEDULE);
         db.execSQL(SQL_CREATE_DAY);
     }
 
+    @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Not required as at version 1
+        db.execSQL("DROP TABLE IF EXISTS " + TasksPersistenceContract.ScheduleEntry.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TasksPersistenceContract.DayEntry.TABLE_NAME);
+        onCreate(db);
     }
 
+    @Override
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Not required as at version 1
     }

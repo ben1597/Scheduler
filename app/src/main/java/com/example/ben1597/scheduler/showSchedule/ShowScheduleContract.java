@@ -15,6 +15,7 @@ public interface ShowScheduleContract {
     interface View {
 
         void showTasks(List<Task> tasks);
+        void setLoadingIndicator(boolean active);
 
     }
 
